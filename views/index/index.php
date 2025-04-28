@@ -13,7 +13,7 @@
           <?= $this->escape($unit->機關名稱) ?>
         </button>
       </div>
-      <?php if ($idx % 6 == 5) { ?>
+      <?php if ($idx % 6 == 5 or $idx == count($this->units) - 1) { ?>
         </div>
       <?php } ?>
     <?php } ?>
