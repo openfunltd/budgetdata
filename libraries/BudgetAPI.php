@@ -15,8 +15,8 @@ class BudgetAPI
 
     public static function apiQuery($url, $reason)
     {
-        if (getenv('BudgetAPI_HOST')) {
-            $url = 'https://' . getenv('BudgetAPI_HOST') . $url;
+        if (getenv('BUDGET_API_HOST')) {
+            $url = 'https://' . getenv('BUDGET_API_HOST') . $url;
         } else {
             $url = 'https://budget.govapi.tw' . $url;
         }

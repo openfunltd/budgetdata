@@ -9,9 +9,9 @@
         <div class="row py-1">
       <?php } ?>
       <div class="col-md-2">
-        <button type="button p-1" class="btn btn-block btn-outline-dark">
+        <a href="/budget/item/unit/<?= $this->escape($unit->機關編號) ?>" class="btn btn-block btn-outline-dark">
           <?= $this->escape($unit->機關名稱) ?>
-        </button>
+        </a>
       </div>
       <?php if ($idx % 6 == 5 or $idx == count($this->units) - 1) { ?>
         </div>
