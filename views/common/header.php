@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?= $this->escape($this->app_name) ?></title>
+<title><?= $this->escape($this->title) ?></title>
 <?= $this->partial('partial/cdn_asset') ?>
 </head>
 <body class="layout-fixed" style="height: auto;">
