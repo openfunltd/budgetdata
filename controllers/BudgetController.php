@@ -27,8 +27,8 @@ class BudgetController extends MiniEngine_Controller
 
         //TODO check $input_year is in $years
 
-        $this->view->title = "{$unit_name} {$input_year} 年度預算";
-        $this->view->content_header = "預算 / {$unit_name}";
+        $this->view->title = "{$unit_name} {$input_year} 年度預算案";
+        $this->view->content_header = "預算案 - {$unit_name}";
         $this->view->input_year = $input_year;
         $this->view->years = $years;
     }

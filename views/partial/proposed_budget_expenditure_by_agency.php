@@ -2,9 +2,9 @@
 $unit_id = $this->unit_id;
 $year = $this->year;
 
-$query = "/proposed_budget_income_by_sources?limit=1000&單位代碼={$unit_id}&年度={$year}";
+$query = "/proposed_budget_expenditure_by_agencys?limit=1000&單位代碼={$unit_id}&年度={$year}";
 $ret = BudgetAPI::apiQuery($query, "查詢單位: {$unit_id} {$year} 年的歲入來源別預算表");
-$rows = $ret->proposedbudgetincomebysources;
+$rows = $ret->proposedbudgetexpenditurebyagencys;
 
 $rows = array_map(function ($row) {
     $row->款名 = str_replace("\n", '', $row->款名);
@@ -30,11 +30,11 @@ $rows = array_map(function ($row) {
     return $row;
 }, $rows);
 ?>
-<!-- proposed_budget_income_by_source -->
+<!-- proposed_budget_expenditure_by_agency -->
 <div class="row py-3">
   <div class="col-12">
-    <h2 class="fs-4" id="proposed-budget-income-by-source">歲入來源別預算表</h2>
-    <table id="proposed-budget-income-by-source-table" class="table table-striped table-bordered w-100">
+    <h2 class="fs-4" id="proposed-budget-expenditure-by-agency">歲出機關別預算表</h2>
+    <table id="proposed-budget-expenditure-by-agency-table" class="table table-striped table-bordered w-100">
       <thead>
         <tr>
           <th></th>
@@ -72,4 +72,4 @@ $rows = array_map(function ($row) {
     </table>
   </div>
 </div>
-<!-- end of proposed_budget_income_by_source -->
+<!-- end of proposed_budget_expenditure_by_agency -->
