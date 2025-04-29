@@ -12,7 +12,10 @@ class BudgetController extends MiniEngine_Controller
 
         //TODO check unit exists
 
-        $ret = BudgetAPI::apiQuery("/proposed_budget_projects?limit=0&agg=年度&單位代碼={$id}", "取得 單位單位:{$id} 年度列表");
+        $ret = BudgetAPI::apiQuery(
+            "/proposed_budget_income_by_sources?limit=0&agg=年度&單位代碼={$id}",
+            "取得 單位單位:{$id} 年度列表"
+        );
         $year_agg = $ret->aggs[0]->buckets;
         $years = array_map(function ($year) {
             return $year->年度;
