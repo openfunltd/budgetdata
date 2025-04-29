@@ -30,6 +30,10 @@
     <?= $this->partial('partial/proposed_budget_expenditure_by_agency', ['unit_id' => $this->id, 'year' => $this->input_year]) ?>
     <!-- end of partial: partial/proposed_budget_expenditure_by_agency -->
 
+    <!-- partial: partial/proposed_budget_expenditure_by_policy -->
+    <?= $this->partial('partial/proposed_budget_expenditure_by_policy', ['unit_id' => $this->id, 'year' => $this->input_year]) ?>
+    <!-- end of partial: partial/proposed_budget_expenditure_by_policy -->
+
   </div>
 </div>
 <?= $this->partial('common/footer') ?>
