@@ -26,3 +26,4 @@
   </div>
 </div>
 <?= $this->partial('common/footer') ?>
+<script src="/static/js/proposed-budget-income-by-source.js"></script>

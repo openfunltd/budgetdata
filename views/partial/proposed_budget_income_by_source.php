@@ -37,6 +37,7 @@ $rows = array_map(function ($row) {
     <table id="proposed-budget-income-by-sources-table" class="table table-striped table-bordered w-100">
       <thead>
         <tr>
+          <th></th>
           <th>款</th>
           <th>項</th>
           <th>目</th>
@@ -48,11 +49,12 @@ $rows = array_map(function ($row) {
           <th>前年度決算數</th>
           <th>本年度與上年度比較</th>
           <th>說明</th>
-        <tr>
+        </tr>
       </thead>
       <tbody>
         <?php foreach ($rows as $row) { ?>
           <tr>
+            <td></td>
             <td><?= $this->escape($row->款) ?></td>
             <td><?= $this->escape($row->項) ?></td>
             <td><?= $this->escape($row->目) ?></td>
