@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
-        <h1>預算案 - 機關</h1>
+       <h1><?= $this->escape($this->h1_text)?></h1>
       </div>
       <div class="col-md-6">
         <!-- breadcrumb -->

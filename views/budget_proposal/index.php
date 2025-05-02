@@ -10,9 +10,11 @@ $units_with_data = $ret->aggs[0]->buckets;
 $units_with_data = array_map(function($unit) {
     return $unit->單位代碼;
 }, $units_with_data);
+$h1_text = "預算案";
+$breadcrumbs = [['預算案']];
 ?>
-<?= $this->partial('common/header', ['title' => '機關 - 預算案']) ?>
-<?= $this->partial('partial/content-header', ['breadcrumbs' => $this->breadcrumbs]) ?>
+<?= $this->partial('common/header', ['title' => $h1_text]) ?>
+<?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $breadcrumbs]) ?>
 <div class="content px-2">
   <div class="container-fluid">
     <?php foreach ($units as $idx => $unit) { ?>
@@ -20,7 +22,7 @@ $units_with_data = array_map(function($unit) {
         <div class="row py-0 py-md-1">
       <?php } ?>
       <div class="col-md-2 py-2 py-md-0">
-        <a href="/budget_proposal/item/unit/<?= $this->escape($unit->機關編號) ?>" class="btn btn-block btn-outline-dark">
+        <a href="/budget_proposal/unit/<?= $this->escape($unit->機關編號) ?>" class="btn btn-block btn-outline-dark">
           <?php if (!in_array($unit->機關編號, $units_with_data)) { ?>
             <i class="bi bi-x-square-fill"></i>
           <?php } ?>
