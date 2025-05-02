@@ -13,9 +13,9 @@
           <?php } else { ?>
             <li class="breadcrumb-item" aria-current="page"><a href="/">首頁</a></li>
             <?php foreach ($this->breadcrumbs as $idx => $crumb) { ?>
-              <li class="breadcrumb-item <?= $this->if($idx == count($this->breadcrumbs) - 1, 'active') ?>" aria-current="page">
+              <li class="breadcrumb-item<?= $this->if($idx == count($this->breadcrumbs) - 1, ' active') ?>">
                 <?php if (count($crumb) > 1) { ?>
-                  <a herf="<?= $this->escape($crumb[1]) ?>"><?= $this->escape($crumb[0]) ?></a>
+                  <a href="<?= $this->escape($crumb[1]) ?>"><?= $this->escape($crumb[0]) ?></a>
                 <?php } else { ?>
                   <?= $this->escape($crumb[0]) ?>
                 <?php } ?>
