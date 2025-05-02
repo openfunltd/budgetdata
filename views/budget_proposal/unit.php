@@ -1,5 +1,6 @@
 <?php
 $data = (object) [
+    'unit_id' => $this->unit_id,
     'unit_name' => $this->unit_name,
     'year' => $this->input_year,
     'breadcrumbs' => $this->breadcrumbs,

@@ -1,13 +1,55 @@
 <?php
 $data = $this->data;
+$unit_id = $data->unit_id;
 $unit_name = $data->unit_name;
 $year = $data->year;
 $h1_text = "預算案 - {$unit_name} - {$year} 年度"; 
+
+//list budget projects
+$ret = BudgetAPI::apiQuery(
+    "/proposed_budget_projects?limit=1000&單位代碼={$unit_id}&年度={$year}&agg=單位",
+    "查詢所有所屬單位的「歲出計畫提要及分支計畫概況表」"
+);
+$sub_units = $ret->aggs[0]->buckets;
+$sub_units = array_map(function ($sub_unit) {
+    return $sub_unit->單位;
+}, $sub_units);
+$projects = $ret->proposedbudgetprojects;
+$projects = array_map(function ($project) {
+    $project->code_n_name = "{$project->工作計畫編號} {$project->工作計畫名稱}";
+    return $project;
+}, $projects);
 ?>
 <?= $this->partial('common/header', ['title' => $h1_text]) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
-<div class="content px-2">
+<div class="content mx-2 mt-3">
   <div class="container-fluid">
+    <h2 class="fs-4 my-3">歲出/歲入</h2>
+    <ul>
+      <li><a href="#">歲入來源別預算表</a></li>
+      <li><a href="#">歲出機關別預算表</a></li>
+      <?php if ($unit_id == 371) { //核能安全委員會及所屬 ?>
+        <li><a href="#">歲出政事別預算表</a></li>
+      <?php } ?>
+    </ul>
+    <h2 class="fs-4 my-3">歲出計畫提要及分支計畫概況表</h2>
+    <?php if (count($sub_units) == 1) { ?>
+      <ul>
+        <?php foreach ($projects as $project) { ?>
+          <li><a href="#"><?= $this->escape($project->code_n_name) ?></a></li>
+        <?php } ?>
+      </ul>
+    <?php } else { ?>
+      <?php foreach ($sub_units as $sub_unit) { ?>
+        <h3 class="fs-5"><?= $this->escape($sub_unit) ?></h3>
+        <ul>
+          <?php foreach ($projects as $project) { ?>
+            <?php if ($project->單位 != $sub_unit) { continue; } ?>
+            <li><a href="#"><?= $this->escape($project->code_n_name) ?></a></li>
+          <?php } ?>
+        </ul>
+      <?php } ?>
+    <?php } ?>
   </div>
 </div>
 <?= $this->partial('common/footer') ?>
