@@ -19,6 +19,10 @@ $projects = array_map(function ($project) {
     $project->code_n_name = "{$project->工作計畫編號} {$project->工作計畫名稱}";
     return $project;
 }, $projects);
+
+//urls
+$url_template = "/budget_proposal/unit/{$unit_id}/%s?year={$year}";
+$url_income_by_sources = sprintf($url_template, 'income_by_sources');
 ?>
 <?= $this->partial('common/header', ['title' => $h1_text]) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
@@ -26,7 +30,7 @@ $projects = array_map(function ($project) {
   <div class="container-fluid">
     <h2 class="fs-4 my-3">歲出/歲入</h2>
     <ul>
-      <li><a href="#">歲入來源別預算表</a></li>
+      <li><a href="<?= $this->escape($url_income_by_sources) ?>">歲入來源別預算表</a></li>
       <li><a href="#">歲出機關別預算表</a></li>
       <?php if ($unit_id == 371) { //核能安全委員會及所屬 ?>
         <li><a href="#">歲出政事別預算表</a></li>
