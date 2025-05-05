@@ -23,6 +23,7 @@ $projects = array_map(function ($project) {
 //urls
 $url_template = "/budget_proposal/unit/{$unit_id}/%s?year={$year}";
 $url_income_by_sources = sprintf($url_template, 'income_by_sources');
+$url_expenditure_by_agencies = sprintf($url_template, 'expenditure_by_agencies');
 ?>
 <?= $this->partial('common/header', ['title' => $h1_text]) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
@@ -31,7 +32,7 @@ $url_income_by_sources = sprintf($url_template, 'income_by_sources');
     <h2 class="fs-4 my-3">歲出/歲入</h2>
     <ul>
       <li><a href="<?= $this->escape($url_income_by_sources) ?>">歲入來源別預算表</a></li>
-      <li><a href="#">歲出機關別預算表</a></li>
+      <li><a href="<?= $this->escape($url_expenditure_by_agencies) ?>">歲出機關別預算表</a></li>
       <!-- TODO 未來應改用打 API 確認有無「歲出政事別預算表」-->
       <?php if (in_array($unit_id,[371, 401])) { //核能安全委員會及所屬 and 立法院 ?>
         <li><a href="#">歲出政事別預算表</a></li>

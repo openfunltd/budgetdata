@@ -19,8 +19,9 @@ class BudgetProposalController extends MiniEngine_Controller
         $this->view->unit_name = $unit_name;
 
         $input_year = filter_input(INPUT_GET, 'year', FILTER_VALIDATE_INT);
+        $input_year = self::getInputYear($entity, $unit_id, $input_year);
 
-        $this->view->input_year = self::getInputYear($entity, $unit_id, $input_year);
+        $this->view->input_year = $input_year;
         $this->view->breadcrumbs = self::getBreadcrumbs($entity, $unit_name, $unit_id, $input_year);
     }
 
@@ -29,6 +30,7 @@ class BudgetProposalController extends MiniEngine_Controller
         $endpoints = [
             'table_of_contents' => '/proposed_budget_expenditure_by_agencys',
             'income_by_sources' => '/proposed_budget_income_by_sources',
+            'expenditure_by_agencies' => '/proposed_budget_expenditure_by_agencys',
         ];
 
         $ret = BudgetAPI::apiQuery(
@@ -60,15 +62,18 @@ class BudgetProposalController extends MiniEngine_Controller
                 [$unit_name],
                 ["{$input_year} 年度"],
             ];
-        }
-
-        if ($entity == 'income_by_sources') {
+        } else {
             $breadcrumbs = [
                 ['預算案', '/budget_proposal'],
                 [$unit_name, "/budget_proposal/unit/{$unit_id}?year={$input_year}"],
                 ["{$input_year} 年度"],
-                ['歲入來源別預算表'],
             ];
+
+            $titles = [
+                'income_by_sources' => '歲入來源別預算表',
+                'expenditure_by_agencies' => '歲出機關別預算表',
+            ];
+            $breadcrumbs[] = [$titles[$entity]];
         }
 
         return $breadcrumbs;
