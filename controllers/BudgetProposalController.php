@@ -31,6 +31,7 @@ class BudgetProposalController extends MiniEngine_Controller
             'table_of_contents' => '/proposed_budget_expenditure_by_agencys',
             'income_by_sources' => '/proposed_budget_income_by_sources',
             'expenditure_by_agencies' => '/proposed_budget_expenditure_by_agencys',
+            'expenditure_by_policies' => '/proposed_budget_expenditure_by_policys',
         ];
 
         $ret = BudgetAPI::apiQuery(
@@ -72,6 +73,7 @@ class BudgetProposalController extends MiniEngine_Controller
             $titles = [
                 'income_by_sources' => '歲入來源別預算表',
                 'expenditure_by_agencies' => '歲出機關別預算表',
+                'expenditure_by_policies' => '歲出政事別預算表',
             ];
             $breadcrumbs[] = [$titles[$entity]];
         }
