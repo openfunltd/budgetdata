@@ -32,7 +32,8 @@ $url_income_by_sources = sprintf($url_template, 'income_by_sources');
     <ul>
       <li><a href="<?= $this->escape($url_income_by_sources) ?>">歲入來源別預算表</a></li>
       <li><a href="#">歲出機關別預算表</a></li>
-      <?php if ($unit_id == 371) { //核能安全委員會及所屬 ?>
+      <!-- TODO 未來應改用打 API 確認有無「歲出政事別預算表」-->
+      <?php if (in_array($unit_id,[371, 401])) { //核能安全委員會及所屬 and 立法院 ?>
         <li><a href="#">歲出政事別預算表</a></li>
       <?php } ?>
     </ul>
