@@ -14,9 +14,14 @@ $sub_units = $ret->aggs[0]->buckets;
 $sub_units = array_map(function ($sub_unit) {
     return $sub_unit->單位;
 }, $sub_units);
+$url_project_template = "/budget_proposal/unit/{$unit_id}/project/%s?year={$year}&sub_unit=%s";
 $projects = $ret->proposedbudgetprojects;
-$projects = array_map(function ($project) {
-    $project->code_n_name = "{$project->工作計畫編號} {$project->工作計畫名稱}";
+$projects = array_map(function ($project) use ($url_project_template, $is_multiple_sub_units){
+    $code = $project->工作計畫編號;
+    $name = $project->工作計畫名稱;
+    $sub_unit = $project->單位;
+    $project->code_n_name = "{$code} {$name}";
+    $project->url = sprintf($url_project_template, $code, $sub_unit);
     return $project;
 }, $projects);
 
@@ -43,7 +48,11 @@ $url_expenditure_by_policies= sprintf($url_template, 'expenditure_by_policies');
     <?php if (count($sub_units) == 1) { ?>
       <ul>
         <?php foreach ($projects as $project) { ?>
-          <li><a href="#"><?= $this->escape($project->code_n_name) ?></a></li>
+          <li>
+            <a href="<?= $this->escape($project->url) ?>">
+              <?= $this->escape($project->code_n_name) ?>
+            </a>
+          </li>
         <?php } ?>
       </ul>
     <?php } else { ?>
@@ -52,7 +61,11 @@ $url_expenditure_by_policies= sprintf($url_template, 'expenditure_by_policies');
         <ul>
           <?php foreach ($projects as $project) { ?>
             <?php if ($project->單位 != $sub_unit) { continue; } ?>
-            <li><a href="#"><?= $this->escape($project->code_n_name) ?></a></li>
+            <li>
+             <a href="<?= $this->escape($project->url) ?>">
+                <?= $this->escape($project->code_n_name) ?>
+              </a>
+            </li>
           <?php } ?>
         </ul>
       <?php } ?>

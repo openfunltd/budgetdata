@@ -2,15 +2,15 @@
 <div class="content-header">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-12">
        <h1><?= $this->escape($this->h1_text)?></h1>
       </div>
-      <div class="col-md-6">
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
         <!-- breadcrumb -->
-        <ol class="breadcrumb float-md-right">
-          <?php if (is_null($this->breadcrumbs)) { ?>
-            <li class="breadcrumb-item active" aria-current="page">首頁</li>
-          <?php } else { ?>
+        <ol class="breadcrumb">
+          <?php if (!is_null($this->breadcrumbs)) { ?>
             <li class="breadcrumb-item" aria-current="page"><a href="/">首頁</a></li>
             <?php foreach ($this->breadcrumbs as $idx => $crumb) { ?>
               <li class="breadcrumb-item<?= $this->if($idx == count($this->breadcrumbs) - 1, ' active') ?>">
