@@ -9,19 +9,23 @@ $(document).ready(function() {
         className: 'details-control',
       },
       {
-        targets: 5, //col:說明
+        targets: 6, //col:說明
         visible: false,
         searchable: false,
       },
       {
-        targets: [1, 2, 3, 4],
+        targets: [4],
+        className: 'text-end',
+      },
+      {
+        targets: [5],
         className: 'text-center',
       },
     ],
     initComplete: function() {
       var api = this.api();
       api.rows().every(function() {
-        var description = this.data()[5];
+        var description = this.data()[6];
         var td = $(this.node()).find('td.details-control');
         if (description.trim() === '') {
           td.addClass('no-description');
@@ -49,7 +53,7 @@ $(document).ready(function() {
       td.html('<i class="bi bi-caret-right-fill"></i>');
     } else {
       var rowData = row.data();
-      var description = rowData[5];
+      var description = rowData[6];
 
       row.child(description).show();
       tr.addClass('shown');

@@ -47,7 +47,7 @@ $rows = ProjectHelper::toRows($branch_projects, $sub_branch_projects);
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
 <div class="content mx-2 mt-3">
   <div class="container-fluid">
-    <div class="row py-3">
+    <div class="row">
       <div class="col-12">
         <!-- project basic info -->
         <table class="table table-bordered table-sm table-hover">
@@ -71,30 +71,37 @@ $rows = ProjectHelper::toRows($branch_projects, $sub_branch_projects);
           </tbody>
         </table>
         <!-- end of project basic info -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
         <!-- project table -->
         <table id="project-table" class="table table-striped table-bordered w-100">
           <thead>
             <tr>
               <th rowspan="2"></th>
-              <th class="text-center" colspan="2" data-dt-order="disable">分支計畫及用途別科目</th>
-              <th rowspan="2">金額</th>
+              <th class="text-center" colspan="3" data-dt-order="disable">分支計畫及用途別科目</th>
+              <!-- TODO make 金額, 承辦單位 horizontally center -->
+              <th class="text-center" rowspan="2">金額</th>
               <th rowspan="2">承辦單位</th>
               <th rowspan="2">說明</th>
             </tr>
             <tr>
-              <th>分支計畫編號</th>
-              <th>分支計畫名稱</th>
+              <th class="text-center">分支計畫</th>
+              <th class="text-center">子分支計畫</th>
+              <th class="text-center">子分支計畫</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($rows as $row) { ?>
               <tr>
                 <td></td>
-                <td><?= $this->escape($row[0]) ?></td>
-                <td><?= $this->escape($row[1]) ?></td>
-                <td><?= $this->escape($row[2]) ?></td>
+                <td width="15%"><?= $this->escape($row[0]) ?></td>
+                <td width="15%"><?= $this->escape($row[1]) ?></td>
+                <td width="20%"><?= $this->escape($row[2]) ?></td>
                 <td><?= $this->escape($row[3]) ?></td>
                 <td><?= $this->escape($row[4]) ?></td>
+                <td><?= $this->escape($row[5]) ?></td>
               </tr>
             <?php } ?>
           </tbody>
