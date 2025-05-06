@@ -53,7 +53,7 @@ $rows = ProjectHelper::toRows($branch_projects, $sub_branch_projects);
         <table class="table table-bordered table-sm table-hover">
           <tbody>
             <tr>
-              <td>工作計畫名稱及編號</td>
+              <td width="15%">工作計畫名稱及編號</td>
               <td><?= $this->escape($code_n_name) ?></td>
             </tr>
             <tr>
