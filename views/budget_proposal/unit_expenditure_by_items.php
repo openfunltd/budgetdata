@@ -36,16 +36,16 @@ $h1_text = "各項費用彙計表 - {$unit_name}";
             <tr>
               <th colspan="4" class="text-center">用途別科目名稱及編號</th>
               <?php foreach ($projects as $project) { ?>
-                <th rowspan="2">
+                <th rowspan="2" class="text-center">
                   <?= $this->escape($project->工作計畫編號)?><br><?= $this->escape($project->工作計畫名稱)?>
                 </th>
               <?php } ?>
             </tr>
+            <tr>
               <th>第一級用途別科目編號</th>
               <th>第一級用途別科目名稱</th>
               <th>第二級用途別科目編號</th>
               <th>第二級用途別科目名稱</th>
-            <tr>
             </tr>
           </thead>
           <tbody>
@@ -63,4 +63,4 @@ $h1_text = "各項費用彙計表 - {$unit_name}";
   </div>
 </div>
 <?= $this->partial('common/footer') ?>
-<script src="/static/js/budget_proposal/project.js"></script>
+<script src="/static/js/budget_proposal/expenditure_by_items.js"></script>
