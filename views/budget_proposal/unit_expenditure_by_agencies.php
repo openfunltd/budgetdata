@@ -9,7 +9,13 @@ $query = "/proposed_budget_expenditure_by_agencys?limit=1000&單位代碼={$unit
 $ret = BudgetAPI::apiQuery($query, "查詢單位: {$unit_id} {$year} 年的歲入來源別預算表");
 $rows = $ret->proposedbudgetexpenditurebyagencys;
 
-$rows = array_map(function ($row) {
+$query = "/proposed_budget_projects?limit=1000&單位代碼={$unit_id}&年度={$year}&單位={$unit_name}";
+$reason = "查詢有無詳細的工作計劃 單位代碼: {$unit_id}, 年度: {$year}, 單位: {$unit_name}";
+$ret = BudgetAPI::apiQuery($query, $reason);
+$projects = $ret->proposedbudgetprojects;
+
+
+$rows = array_map(function ($row) use ($projects, $unit_id, $year, $unit_name) {
     $row->款名 = str_replace("\n", '', $row->款名);
     $row->項名 = str_replace("\n", '', $row->項名);
     $row->目名 = str_replace("\n", '', $row->目名);
@@ -30,6 +36,24 @@ $rows = array_map(function ($row) {
     $row->本年度與上年度比較_formatted = (filter_var($row->本年度與上年度比較, FILTER_VALIDATE_INT))
         ? number_format($row->本年度與上年度比較)
         : $row->本年度與上年度比較;
+
+    $code = $row->編號;
+    $has_detail = false;
+    foreach ($projects as $project) {
+        $project_code = $project->工作計畫編號;
+        if ($project_code == $code) {
+            $has_detail = true;
+            break;
+        }
+    }
+    $row->has_detail = $has_detail;
+    $row->url_detail = sprintf("/budget_proposal/unit/%s/project/%s?year=%d&sub_unit=%s",
+        $unit_id,
+        $code,
+        $year,
+        $unit_name,
+    );
+
     return $row;
 }, $rows);
 ?>
@@ -55,6 +79,7 @@ $rows = array_map(function ($row) {
               <th>前年度決算數</th>
               <th>本年度與上年度比較</th>
               <th>說明</th>
+              <th>詳細資料</th>
             </tr>
           </thead>
           <tbody>
@@ -72,6 +97,13 @@ $rows = array_map(function ($row) {
                 <td><?= $this->escape($row->前年度決算數_formatted) ?></td>
                 <td><?= $this->escape($row->本年度與上年度比較_formatted) ?></td>
                 <td><?= $this->escape($row->說明) ?></td>
+                <td>
+                  <?php if ($row->has_detail == true) { ?>
+                    <a href="<?= $this->escape($row->url_detail) ?>">
+                      <i class="fa-solid fa-eye"></i>
+                    </a>
+                  <?php } ?>
+                </td>
               </tr>
             <?php } ?>
           </tbody>
