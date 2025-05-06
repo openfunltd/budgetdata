@@ -46,6 +46,7 @@ class BudgetProposalController extends MiniEngine_Controller
             'expenditure_by_agencies' => '/proposed_budget_expenditure_by_agencys',
             'expenditure_by_policies' => '/proposed_budget_expenditure_by_policys',
             'project' => '/proposed_budget_projects',
+            'expenditure_by_items' => '/proposed_budget_expenditure_by_items',
         ];
 
         $url = "{$endpoints[$entity]}?limit=0&agg=年度&單位代碼={$unit_id}";
@@ -97,6 +98,14 @@ class BudgetProposalController extends MiniEngine_Controller
                     [$project_code],
                 ];
             }
+        } elseif ($entity == 'expenditure_by_items') {
+            $breadcrumbs = [
+                ['預算案', '/budget_proposal'],
+                [$unit_name, "/budget_proposal/unit/{$unit_id}?year={$input_year}"],
+                ["{$input_year} 年度"],
+                ['各項費用彙計表'],
+                [$sub_unit],
+            ];
         } else {
             $breadcrumbs = [
                 ['預算案', '/budget_proposal'],
