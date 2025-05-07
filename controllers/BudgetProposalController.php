@@ -19,10 +19,13 @@ class BudgetProposalController extends MiniEngine_Controller
         $this->view->unit_name = $unit_name;
 
         $input_year = filter_input(INPUT_GET, 'year', FILTER_VALIDATE_INT);
-        $input_year = self::getInputYear($entity, $unit_id, $input_year, $sub_unit, $project_code);
         $sub_unit = filter_input(INPUT_GET, 'sub_unit', FILTER_SANITIZE_STRING);
+
+        $year_data = self::getInputYear($entity, $unit_id, $input_year, $sub_unit, $project_code);
+        $input_year = $year_data->input_year;
         $sub_units = self::getSubUnits($sub_unit, $unit_id, $input_year);
 
+        $this->view->year_data = $year_data;
         $this->view->input_year = $input_year;
         $this->view->sub_unit = $sub_unit;
         $this->view->sub_units = $sub_units;
@@ -68,7 +71,19 @@ class BudgetProposalController extends MiniEngine_Controller
 
         //TODO check $input_year is in $years
 
-        return $input_year;
+        $base_url = "/budget_proposal/unit/{$unit_id}/{$entity}";
+        if (isset($project_code)) {
+            $base_url .= "/{$project_code}";
+        }
+        if (isset($sub_unit)) {
+            $base_url .= "?sub_unit={$sub_unit}";
+        }
+
+        return (object) [
+            'input_year' => $input_year,
+            'years' => $years,
+            'base_url' => $base_url,
+        ];
     }
 
     private static function getBreadcrumbs($entity, $unit_name, $unit_id, $input_year, $sub_unit, $sub_units, $project_code)

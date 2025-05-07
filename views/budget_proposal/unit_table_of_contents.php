@@ -4,6 +4,7 @@ $unit_id = $data->unit_id;
 $unit_name = $data->unit_name;
 $year = $data->year;
 $h1_text = "預算案 - {$unit_name} - {$year} 年度"; 
+$year_data = $data->year_data;
 
 //list budget projects
 $ret = BudgetAPI::apiQuery(
@@ -43,7 +44,7 @@ $url_income_by_sources = sprintf($url_template, 'income_by_sources');
 $url_expenditure_by_agencies = sprintf($url_template, 'expenditure_by_agencies');
 $url_expenditure_by_policies= sprintf($url_template, 'expenditure_by_policies');
 ?>
-<?= $this->partial('common/header', ['title' => $h1_text]) ?>
+<?= $this->partial('common/header', ['title' => $h1_text, 'year_data' => $year_data]) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
 <div class="content mx-2 mt-3">
   <div class="container-fluid">

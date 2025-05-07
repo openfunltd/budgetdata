@@ -4,6 +4,7 @@ $unit_id = $data->unit_id;
 $unit_name = $data->unit_name;
 $year = $data->year;
 $sub_unit = $data->sub_unit;
+$year_data = $data->year_data;
 
 $query = "/proposed_budget_expenditure_by_items?limit=1000&單位={$sub_unit}&年度={$year}";
 $reason = "查詢各項費用彙計表列表資料 單位: {$sub_unit}, 年度= {$year}";
@@ -25,7 +26,7 @@ $rows = ExpenditureByItemHelper::toRows($expenditure_by_items, $projects);
 
 $h1_text = "各項費用彙計表 - {$unit_name}"; 
 ?>
-<?= $this->partial('common/header', ['title' => $h1_text]) ?>
+<?= $this->partial('common/header', ['title' => $h1_text, 'year_data' => $year_data]) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
 <div class="content mx-2 mt-3">
   <div class="container-fluid">

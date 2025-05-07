@@ -4,6 +4,7 @@ $unit_id = $data->unit_id;
 $unit_name = $data->unit_name;
 $year = $data->year;
 $h1_text = "歲入來源別預算表"; 
+$year_data = $data->year_data;
 
 $query = "/proposed_budget_income_by_sources?limit=1000&單位代碼={$unit_id}&年度={$year}";
 $ret = BudgetAPI::apiQuery($query, "查詢單位: {$unit_id} {$year} 年的歲入來源別預算表");
@@ -33,7 +34,7 @@ $rows = array_map(function ($row) {
     return $row;
 }, $rows);
 ?>
-<?= $this->partial('common/header', ['title' => $h1_text]) ?>
+<?= $this->partial('common/header', ['title' => $h1_text, 'year_data' => $year_data]) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
 <div class="content mx-2 mt-3">
   <div class="container-fluid">

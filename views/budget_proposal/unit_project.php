@@ -6,6 +6,7 @@ $year = $data->year;
 $sub_unit = $data->sub_unit;
 $sub_units = $data->sub_units;
 $project_code = $data->project_code;
+$year_data = $data->year_data;
 
 $query = "/proposed_budget_project/{$unit_id}-{$year}-{$sub_unit}-{$project_code}";
 $ret = BudgetAPI::apiQuery($query, "查詢工作計畫 id:{$unit_id}-{$year}-{$sub_unit}-{$project_code}");
@@ -43,7 +44,7 @@ $sub_branch_projects = $ret->proposedbudgetsubbranchprojects;
 
 $rows = ProjectHelper::toRows($branch_projects, $sub_branch_projects);
 ?>
-<?= $this->partial('common/header', ['title' => $h1_text]) ?>
+<?= $this->partial('common/header', ['title' => $h1_text, 'year_data' => $year_data]) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
 <div class="content mx-2 mt-3">
   <div class="container-fluid">
