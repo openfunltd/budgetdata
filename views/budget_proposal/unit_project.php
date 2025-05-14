@@ -43,8 +43,12 @@ $ret = BudgetAPI::apiQuery($query, $reason);
 $sub_branch_projects = $ret->proposedbudgetsubbranchprojects;
 
 $rows = ProjectHelper::toRows($branch_projects, $sub_branch_projects);
+
+$this->title = $h1_text . " - {$unit_name} {$year} 年度預算案";
+$this->og_description = "按各項政府支出計畫的主要內容與其下分支計畫分配情形的預算表";
+$this->year_date = $year_data;
 ?>
-<?= $this->partial('common/header', ['title' => $h1_text, 'year_data' => $year_data]) ?>
+<?= $this->partial('common/header', $this) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
 <div class="content mx-2 mt-3">
   <div class="container-fluid">

@@ -12,9 +12,13 @@ $units_with_data = array_map(function($unit) {
 }, $units_with_data);
 $h1_text = "預算案";
 $breadcrumbs = [['預算案']];
+$this->h1_text = $h1_text;
+$this->title = $h1_text;
+$this->og_description = "各預算機關在審預算前所提供的預算提案";
+$this->breadcrumbs = $breadcrumbs;
 ?>
-<?= $this->partial('common/header', ['title' => $h1_text]) ?>
-<?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $breadcrumbs]) ?>
+<?= $this->partial('common/header', $this) ?>
+<?= $this->partial('partial/content-header', $this) ?>
 <div class="content px-2">
   <div class="container-fluid">
     <?php foreach ($units as $idx => $unit) { ?>

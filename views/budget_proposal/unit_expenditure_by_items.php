@@ -24,9 +24,13 @@ foreach ($expenditure_by_items as $item) {
 }
 $rows = ExpenditureByItemHelper::toRows($expenditure_by_items, $projects);
 
-$h1_text = "各項費用彙計表 - {$unit_name}"; 
+$h1_text = "各項費用彙計表 - {$sub_unit}";
+
+$this->title = $h1_text . " - {$unit_name} {$year} 年度預算案";
+$this->og_description = "政府支出按費用性質（如人事費、業務費等）加總彙整的預算表";
+$this->year_date = $year_data;
 ?>
-<?= $this->partial('common/header', ['title' => $h1_text, 'year_data' => $year_data]) ?>
+<?= $this->partial('common/header', $this) ?>
 <?= $this->partial('partial/content-header', ['h1_text' => $h1_text, 'breadcrumbs' => $data->breadcrumbs]) ?>
 <div class="content mx-2 mt-3">
   <div class="container-fluid">
