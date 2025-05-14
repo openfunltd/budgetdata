@@ -4,6 +4,7 @@ $unit_id = $data->unit_id;
 $unit_name = $data->unit_name;
 $year = $data->year;
 $sub_unit = $data->sub_unit;
+$sub_units = $data->sub_units;
 $year_data = $data->year_data;
 
 $query = "/proposed_budget_expenditure_by_items?limit=1000&單位={$sub_unit}&年度={$year}";
@@ -24,7 +25,10 @@ foreach ($expenditure_by_items as $item) {
 }
 $rows = ExpenditureByItemHelper::toRows($expenditure_by_items, $projects);
 
-$h1_text = "各項費用彙計表 - {$sub_unit}";
+$h1_text = "各項費用彙計表";
+if (count($sub_units) > 1 and $sub_unit != $unit_name) {
+    $h1_text .= " - {$sub_unit}";
+}
 
 $this->title = $h1_text . " - {$unit_name} {$year} 年度預算案";
 $this->og_description = "政府支出按費用性質（如人事費、業務費等）加總彙整的預算表";

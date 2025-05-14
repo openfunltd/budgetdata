@@ -23,12 +23,15 @@ $project_data->預算金額 = (filter_var($project_data->預算金額, FILTER_VA
 $basic_condition = "&單位代碼={$unit_id}&年度={$year}&工作計畫編號={$project_code}";
 $basic_reason = "單位代碼: {$unit_id}, 年度: {$year}, 工作計畫編號: {$project_code}"; 
 if (count($sub_units) > 1) {
-    $h1_text = "歲出計畫提要及分支計畫概況表 - {$sub_unit} - {$project_code} {$project_name}"; 
     $basic_condition .= "&單位={$sub_unit}";
     $basic_reason .= ", 單位: {$sub_unit}";
-} else {
-    $h1_text = "歲出計畫提要及分支計畫概況表 - {$project_code} {$project_name}"; 
 }
+
+$h1_text = "歲出計畫提要及分支計畫概況表";
+if (count($sub_units) > 1 and $sub_unit != $unit_name) {
+    $h1_text .= " - {$sub_unit}";
+}
+$h1_text .= " - {$project_code} {$project_name}";
 
 //查詢分支計畫
 $query = "/proposed_budget_branch_projects?limit=1000" . $basic_condition;
